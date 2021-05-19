@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const loader = require('sass-loader')
 
 module.exports = {
     mode: modoDev ? 'development' : 'production',
@@ -11,7 +12,7 @@ module.exports = {
         filename: 'principal.js',
         path: __dirname + '/public'
     },
-    optimization:{
+    optimization: {
         minimizer: [
             new UglifyJsPlugin({
                 cache: true,
@@ -34,6 +35,9 @@ module.exports = {
                 'css-loader', //interpretatr @import, url()...
                 'sass-loader',
             ]
+        }, {
+            test: /\.(png|svg|jpg|gif)$/,
+            use: ['file-loader']
         }]
     }
 }
